@@ -1,3 +1,35 @@
+<?php
+
+    require "model/users.php";
+    require "dbbroker.php";
+    session_start();
+
+    if(isset($_POST["username"]) && isset($_POST['pasword'])){
+        $uname=$_POST["username"];
+        $upass=$_POST['password'];
+
+        $korisnik = new User(1, $user, $upass);
+
+        //$conn = new mysqli();
+        $odgovor = User::loginUser($korisnik, $conn);
+
+        if($odgovor->num_rows == 1){
+            $_SESSION["user_id"] = $korisnik->id;
+            header("Location: home.php");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
